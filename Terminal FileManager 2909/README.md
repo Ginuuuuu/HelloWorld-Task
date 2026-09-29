@@ -2,7 +2,7 @@ Hi Gershon,
 As per the task I have created my first ever CLI - Based fileManager, Kindly review it 
 
 Use these command to check it,
-Hope you know about test it anyhow its my circus to mention it
+Hope you know about test it anyhow its my responsibility to mention it
 
 ```text
 npm install
@@ -11,7 +11,7 @@ npm install
 npm start
 ```
 
-
+# COMMANDS
 
 ```text
 help
