@@ -1,6 +1,19 @@
 const fs = require('fs');
 
-fs.readFile('./Input/text.txt', 'utf-8', (err, data) => {
+
+// // without character encoding command
+// fs.readFile('./Input/text.txt', (err, data) => {
+//   if (err) {
+//     console.log('Error reading file:', err);
+//     return;
+//   }
+
+//   console.log('File content:');
+//   console.log(data.toString());
+// });
+
+// using character encoding no need for toStiong ()
+fs.readFile('./Input/text.txt', 'utf8', (err, data) => {
   if (err) {
     console.log('Error reading file:', err);
     return;
@@ -10,7 +23,8 @@ fs.readFile('./Input/text.txt', 'utf-8', (err, data) => {
   console.log(data);
 });
 
-fs.writeFile('./Input/output.txt', 'Hello from Node.js!', (err) => {
+
+fs.writeFile('./Input/text.txt', 'Hello from Node.js!', (err) => {
   if (err) {
     console.log('Error writing file:', err);
     return;
