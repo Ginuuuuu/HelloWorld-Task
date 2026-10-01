@@ -13,7 +13,7 @@ npm start
 
 ## COMMANDS
 
-### <help> command will list all the comands
+### <help> will list all the comands
 ```text
 help
 ```
