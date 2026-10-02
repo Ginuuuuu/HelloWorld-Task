@@ -1,6 +1,19 @@
 const http = require('http');
 
-http.createServer((req, res) => {
-    res.write('# Hello guyss  rgwefuwofwfr wfkfiwhfuwkifwujbfwfw wefdkwgfkiwejfbrwef fkwjbfvgweikfbwe werkfbgwerkifwerjbfkilfhbklfbwer werkfgebrgkioerbfrse');
+const server = http.createServer((req, res) => {
+    console.log('Request Made');
+    
+    res.write('./Learning/Buffer & Stream/docs/buffer.txt');
     res.end();
-}).listen(3012);
+
+});
+
+server.listen(3030, 'localhost', () => {
+    console.log('server is Listening');
+});
+
+// // simple listening
+// http.createServer((req, res) => {
+//     res.write('# Hello guyss');
+//     res.end();
+// }).listen(3012);
