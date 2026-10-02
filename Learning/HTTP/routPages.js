@@ -25,6 +25,13 @@ const server = http.createServer((req, res) => {
         path += 'Hackathon.html';
     } else if (req.url == '/' || req.url == '/home') {
         path += 'home.html';
+    } else if (req.url == '/veedu'){
+        res.statusCode = '301';
+        res.setHeader('Location', '/');
+        res.end();
+    } else {
+        path += 'notFound.html';
+        res.statusCode = 404;
     }
 
     fs.readFile(path, (err, data) => {
