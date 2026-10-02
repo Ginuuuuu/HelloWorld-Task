@@ -9,24 +9,25 @@ const fs = require('fs');
 const server = http.createServer((req, res) => {
     console.log('Request Made');
 
-    console.log(res.url);
+    console.log(req.url);
 
-    // let path = './HTML files/'
-    // let path;
+    let path = './HTML files/'
 
-    // if (res.url == '/github') {
-    //     path = 'GitHub'
-    // } else if (res.url == '/iphone') {
-    //     path = 'Iphone'
-    // } else if (res.url == '/opsmonsters') {
-    //     path = 'Opsmonsters'
-    // } else if (res.url == '/devops') {
-    //     path = 'DevOps'
-    // } else if (res.url == '/hackathon') {
-    //     path = 'Hackathon'
-    // }
+    if (req.url == '/github.html') {
+        path += 'GitHub.html';
+    } else if (req.url == '/iphone.html') {
+        path += 'Iphone.html';
+    } else if (req.url == '/opsmonsters.html') {
+        path += 'Opsmonsters.html';
+    } else if (req.url == '/devops.html') {
+        path += 'DevOps.html';
+    } else if (req.url == '/hackathons.html') {
+        path += 'Hackathon.html';
+    } else if (req.url == '/' || req.url == '/home') {
+        path += 'home.html';
+    }
 
-    fs.readFile(`./HTML files/GitHub.html`, (err, data) => {
+    fs.readFile(path, (err, data) => {
         if (err) {
             console.log(err.message);
             res.end();
