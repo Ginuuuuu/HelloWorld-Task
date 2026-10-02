@@ -9,3 +9,4 @@ build/
 coverage/
 src/uploads/avatars/*
 !src/uploads/avatars/.gitkeep
+.dev_mongo_data/

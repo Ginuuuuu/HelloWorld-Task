@@ -33,15 +33,27 @@ export const connectDB = async (uri) => {
       console.log('[Database] Starting built-in in-memory MongoDB server for testing...');
 
       try {
+        const path = await import('path');
+        const fs = await import('fs');
+        const devDbDir = path.default.join(process.cwd(), '.dev_mongo_data');
+        if (!fs.default.existsSync(devDbDir)) {
+          fs.default.mkdirSync(devDbDir, { recursive: true });
+        }
+
         const { MongoMemoryServer } = await import('mongodb-memory-server');
-        memoryServerInstance = await MongoMemoryServer.create();
+        memoryServerInstance = await MongoMemoryServer.create({
+          instance: {
+            dbPath: devDbDir,
+            storageEngine: 'wiredTiger',
+          },
+        });
         const memUri = memoryServerInstance.getUri();
 
         const conn = await mongoose.connect(memUri, {
           autoIndex: true,
         });
 
-        console.log(`[Database] Embedded MongoDB connected successfully! (Ready for Postman)\n`);
+        console.log(`[Database] Embedded MongoDB connected with persistent storage! (Ready for Postman)\n`);
         return conn;
       } catch (memError) {
         console.error(`[Database Error] Failed to start in-memory MongoDB: ${memError.message}`);
