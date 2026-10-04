@@ -27,5 +27,5 @@ app.get('/veedu', (req, res) => {
 
 // for unknown url || this will not check the url it will simply give response, so add it in the last condition, it is a non-conditional function
 app.use((req, res) => {
-    res.sendFile('./HTML files/notFound.html', {root: __dirname});
+    res.status(404).sendFile('./HTML files/notFound.html', {root: __dirname});
 })
