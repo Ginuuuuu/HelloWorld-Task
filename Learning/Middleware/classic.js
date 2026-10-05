@@ -5,11 +5,17 @@ const exp = require('express');
 
 const app = exp();
 
+// margon third-party middleware
+const morgan = require('morgan');
+
 
 // for switch the directoruy
 const path = require('path');
 
 app.listen(5000);
+
+
+app.use(morgan('dev'));
 
 app.use((req, res, next) => {
     // console.log(res.path);
