@@ -2,7 +2,7 @@ import exp from "express";
 
 const app = exp();
 
-const PORT = 3001;
+const PORT = 4001;
 
 const users = [
     {id: 1, susername: "Reshin"},
@@ -23,10 +23,10 @@ app.get('/api/users', (req, res)=>{
 app.get('/api/users/:id', (req, res)=>{
     // converting string to int
     const id = parseInt(req.params.id);
-    res.send(id);
-    console.log(id);
-});
-
+    const user = users.find((user) => user.id ===id);
+    res.send(user);
+    console.log(user);
+})
 app.listen(PORT, () => {
-    console.log(`The PORT ${PORT} is listening`);
+    console.log(`The PORT ${PORT} is listening.......`);
 });
