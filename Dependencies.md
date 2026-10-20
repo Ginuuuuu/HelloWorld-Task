@@ -19,3 +19,9 @@ npm i cookie-parser
 express-session => handle & manage sessions
 
 npm i express-session
+
+
+
+passport for third-party authentifucations && passport-local for username password authentification
+
+npm i passport passport-local

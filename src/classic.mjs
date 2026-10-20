@@ -8,7 +8,10 @@ import router from "./router/Router.mjs";
 import { users, students } from "./utils/constants.mjs";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import { Strategy as localStrategy } from "passport-local";
+import passport from "passport";
 
+const PORT = 4001;
 
 const app = exp();
 
@@ -29,11 +32,38 @@ app.use(
         cookie: {
             maxAge: 60000 * 60
         }
-    }));
+    }
+));
+
+app.use(passport.initialize());                 /* initalising the password authenticator */
+app.use(passport.session());                    /* initalising the password session */
+
+/* middleware for password authenticator */
+passport.use( new localStrategy (
+    {usernameField: "sname", passwordField: "password"},        /* initialising the field name */
+    (sname, password, done) => {
+    const student = students.find((student)=> student.sname === sname);
+    if(!sname) {
+        return done(null, false, {err: "Invalid User"});
+    }
+    if(student.password !== password) {
+        return done(null, false, {err: "Incorrect password"});
+    }
+    return done(null, student);
+}));
+
+// serialize the login
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+// deserialize the login
+passport.deserializeUser((id, done) => {
+    const user = students.find((user)=> user.id === id);
+    done(null, user||false);
+});
 
 app.use(router);
-
-const PORT = 4001;
 
 app.get('/', (req, res)=>{
     res.cookie("user", "admin", {maxAge: 600000 * 60, signed: true});
@@ -46,6 +76,24 @@ app.get('/', (req, res)=>{
         }
     });
     res.send({id: "eee", welcome: "Welcome daaa"});
+});
+
+// login page || intake of credentials
+app.post("/login", (req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+        if(err) {
+            return next(err);
+        }
+        if(!user){
+            return res.status(403).json({message: info?.message} || "Login Failed");
+        }
+        req.logIn(user, (err) => {
+            if(err){
+                return next(err);
+            }
+            return res.json({message: "Login Successfull", user});
+        });
+    }) (req, res, next);
 });
 
 /* const users = [
