@@ -1,3 +1,5 @@
+import { users, students } from "../utils/constants.mjs";
+
 export const studfindIndex = (req, res, next) => {
     const StudID = parseInt(req.params.id);
     if(isNaN(StudID)) {
@@ -10,3 +12,4 @@ export const studfindIndex = (req, res, next) => {
     req.studentsIndex = studentsIndex;
     next();
 }
+

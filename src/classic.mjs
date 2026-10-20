@@ -2,16 +2,23 @@ import exp from "express";
 import { createUserCheckScheme } from "./utils/validationSchema.mjs";
 import { checkSchema, validationResult, matchedData } from "express-validator";
 import { studfindIndex } from "./utils/helper.mjs";
-import { studentrout } from "./router/studentRouter.mjs";
-import { userRout } from "./router/userRouter.mjs";
+/* import studentrout from "./router/studentRouter.mjs";
+import userRout from "./router/userRouter.mjs"; */
+import router from "./router/Router.mjs";
+import { users, students } from "./utils/constants.mjs";
 
-import values from "lodash";
 
 const app = exp();
 
+// GETTING POST REQUEST AS JSON FILE AND PROCESSING IT
+app.use(exp.json());
+
+app.use(router);
+app.use(router);
+
 const PORT = 4001;
 
-const users = [
+/* const users = [
     {id: 1, susername: "Reshin"},
     {id: 2, susername: "Ginu"},
     {id: 3, susername: "Anizan"},
@@ -28,7 +35,7 @@ const students = [
     {id:6, sname: "ughvguy", class:10, age:15},
     {id:7, sname: "tfycvubh", class:12, age:19},
     {id:8, sname: "cccccccc", class:1, age:5}
-]
+] */
 
 /* const studfindIndex = (req, res, next) => {
     const StudID = parseInt(req.params.id);
@@ -42,9 +49,6 @@ const students = [
     req.studentsIndex = studentsIndex;
     next();
 } */
-
-// GETTING POST REQUEST AS JSON FILE AND PROCESSING IT
-app.use(exp.json());
 
 app.get('/', (req, res)=>{
     res.send({id: "eee", welcome: "Welcome daaa"});
@@ -66,7 +70,7 @@ app.get('/api/students/:id', (req, res)=>{
     console.log(user);
 }); */
 
-app.get("/api/users", (req, res)=>{
+/* app.get("/api/users", (req, res)=>{
     // converting string to int
 
     // users?filter=susername&values=go
@@ -75,7 +79,7 @@ app.get("/api/users", (req, res)=>{
     res.send(users.filter(((user)=>user[filter].toLowerCase().includes(values))));
 
     console.log(user);
-});
+}); */
 
 /* app.get("/api/students", (req, res)=>{
     // converting string to int
@@ -89,24 +93,24 @@ app.get("/api/users", (req, res)=>{
 }); */
 
 // GETTING POST REQUEST AND THEN STORING IN IN THE USER ARAY
-app.post("/api/students", checkSchema(createUserCheckScheme), (req, res) => {
-    /* console.log(req['express-validator#contexts']); */
-    const result = validationResult(req);
-    /* console.log(result); */
-    if (!result.isEmpty()) {
-        return res.status(400).send({errMsg:result.array()});
-    }
-    /* will give all the element from the req body
-    const {body} = req; */
+// app.post("/api/students", checkSchema(createUserCheckScheme), (req, res) => {
+//     /* console.log(req['express-validator#contexts']); */
+//     const result = validationResult(req);
+//     /* console.log(result); */
+//     if (!result.isEmpty()) {
+//         return res.status(400).send({errMsg:result.array()});
+//     }
+//     /* will give all the element from the req body
+//     const {body} = req; */
 
-    /* use matcheddata to take only the validated Data && no need for character restructuring */
-    const body = matchedData(req);
-    const newUser = {id: users[users.length-1].id+1, ...body};
-    users.push(newUser);
-    res.status(201).send(newUser);
-});
+//     /* use matcheddata to take only the validated Data && no need for character restructuring */
+//     const body = matchedData(req);
+//     const newUser = {id: users[users.length-1].id+1, ...body};
+//     users.push(newUser);
+//     res.status(201).send(newUser);
+// });
 
-// PUT REQUEST WILL UPDATE THE ENTIRE ROW OF THE PARTICULAR COLUMN BASED ON THE GIVEN PARAMETERS
+/* // PUT REQUEST WILL UPDATE THE ENTIRE ROW OF THE PARTICULAR COLUMN BASED ON THE GIVEN PARAMETERS
 app.put("/api/users/:id", (req, res) => {
     // GETTING THE PARAMETER ID, AND FINDING THE INDEX OF THAT
     const id = parseInt(req.params.id);
@@ -124,9 +128,9 @@ app.put("/api/users/:id", (req, res) => {
     res.status(201).send({msg: "User Updated"});
     console.log(body);
     // console.log(req.put);
-});
+}); */
 
-// patch is used to update a particular element from a table 
+/* // patch is used to update a particular element from a table 
 app.patch("/api/students/:id", studfindIndex, (req, res) => {
     // GETTING THE PARAMETER ID, AND FINDING THE INDEX OF THAT
     // const StudID = parseInt(req.params.id);
@@ -167,7 +171,7 @@ app.delete("/api/students/:id", studfindIndex, (req, res) => {
     res.status(200).send(students);
     console.log(students);
 
-});
+}); */
 
 app.listen(PORT, () => {
     console.log(`The PORT ${PORT} is listening.......`);
