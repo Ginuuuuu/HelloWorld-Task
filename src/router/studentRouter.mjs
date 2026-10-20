@@ -18,6 +18,8 @@ route.get("/api/students", (req, res)=>{
 
     // users?filter=susername&values=go
     res.cookie("BigBuddy", "heyyyy", {maxAge:60000});
+    req.session.visited = true;                 /* to save the session so its accessible and authentifyable */
+    console.log(req.session.id);
     const {query:{filter, values}} = req;
     if (filter && values) {
         console.log(filter, values);

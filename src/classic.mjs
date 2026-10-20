@@ -7,6 +7,7 @@ import userRout from "./router/userRouter.mjs"; */
 import router from "./router/Router.mjs";
 import { users, students } from "./utils/constants.mjs";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 
 const app = exp();
@@ -17,13 +18,33 @@ app.use(exp.json());
 // get cookies in proper format
 app.use(cookieParser("encrypt"));
 
-app.use(router);
+app.use(
+    session({
+        // a random non-guessable name for secret
+        secret: "sfuidfusdgfuisgf",
+        // will not save the random visits && it will not store anything until storing data forcefull in the particular endpoint
+        saveUninitialized: false,
+        // will save only if anything is saved to the prior saved stuff || will not force to create another session to store data
+        resave: false,
+        cookie: {
+            maxAge: 60000 * 60
+        }
+    }));
+
 app.use(router);
 
 const PORT = 4001;
 
 app.get('/', (req, res)=>{
     res.cookie("user", "admin", {maxAge: 600000 * 60, signed: true});
+    console.log(req.session.id);
+    req.sessionStore.get(req.session.id, (err, sessionData) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(sessionData);
+        }
+    });
     res.send({id: "eee", welcome: "Welcome daaa"});
 });
 

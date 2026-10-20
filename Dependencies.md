@@ -13,3 +13,9 @@ npm i -g npm || npm i -save lodash
 cokkie-parser => structure the cookie in json format
 
 npm i cookie-parser
+
+
+
+express-session => handle & manage sessions
+
+npm i express-session
