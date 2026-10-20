@@ -1,8 +1,11 @@
 import exp from "express";
-import { createUserCheckScheme } from "../utils/validationSchema.mjs";
+import { createUserCheckScheme } from "./utils/validationSchema.mjs";
 import { checkSchema, validationResult, matchedData } from "express-validator";
+import { studfindIndex } from "./utils/helper.mjs";
+import { studentrout } from "./router/studentRouter.mjs";
+import { userRout } from "./router/userRouter.mjs";
 
-// import { values } from "lodash";
+import values from "lodash";
 
 const app = exp();
 
@@ -13,7 +16,7 @@ const users = [
     {id: 2, susername: "Ginu"},
     {id: 3, susername: "Anizan"},
     {id: 4, susername: "Paul"},
-    {id: 5, susername: "BhaAni"}
+    {id: 5, susername: "cfyguigyt"}
 ]
 
 const students = [
@@ -22,12 +25,12 @@ const students = [
     {id:3, sname: "Paul", class:9, age:15},
     {id:4, sname: "Smith", class:10, age:16},
     {id:5, sname: "Ginu", class:8, age:14},
-    {id:6, sname: "Leenu", class:10, age:15},
-    {id:7, sname: "Gifty", class:12, age:19},
+    {id:6, sname: "ughvguy", class:10, age:15},
+    {id:7, sname: "tfycvubh", class:12, age:19},
     {id:8, sname: "cccccccc", class:1, age:5}
 ]
 
-const studfindIndex = (req, res, next) => {
+/* const studfindIndex = (req, res, next) => {
     const StudID = parseInt(req.params.id);
     if(isNaN(StudID)) {
         return res.status(400).send({msg: "Bad Request , Invalid"});
@@ -38,7 +41,7 @@ const studfindIndex = (req, res, next) => {
     }
     req.studentsIndex = studentsIndex;
     next();
-}
+} */
 
 // GETTING POST REQUEST AS JSON FILE AND PROCESSING IT
 app.use(exp.json());
@@ -47,7 +50,7 @@ app.get('/', (req, res)=>{
     res.send({id: "eee", welcome: "Welcome daaa"});
 });
 
-app.get('/api/users/:id', (req, res)=>{
+/* app.get('/api/users/:id', (req, res)=>{
     // converting string to int
     const id = parseInt(req.params.id);
     const user = users.find((user) => user.id ===id);
@@ -61,7 +64,7 @@ app.get('/api/students/:id', (req, res)=>{
     const user = users.find((user) => user.id ===id);
     res.send(user);
     console.log(user);
-});
+}); */
 
 app.get("/api/users", (req, res)=>{
     // converting string to int
@@ -74,7 +77,7 @@ app.get("/api/users", (req, res)=>{
     console.log(user);
 });
 
-app.get("/api/students", (req, res)=>{
+/* app.get("/api/students", (req, res)=>{
     // converting string to int
 
     // users?filter=susername&values=go
@@ -82,13 +85,22 @@ app.get("/api/students", (req, res)=>{
     console.log(filter, values);
     res.send(users.filter(((user)=>user[filter].toLowerCase().includes(values))));
 
-    console.log(user);
-});
+    console.log(users);
+}); */
 
 // GETTING POST REQUEST AND THEN STORING IN IN THE USER ARAY
-app.post("/api/students", checkSchema[createUserCheckScheme], (req, res) => {
-    console.log(req);
-    const {body} = req;
+app.post("/api/students", checkSchema(createUserCheckScheme), (req, res) => {
+    /* console.log(req['express-validator#contexts']); */
+    const result = validationResult(req);
+    /* console.log(result); */
+    if (!result.isEmpty()) {
+        return res.status(400).send({errMsg:result.array()});
+    }
+    /* will give all the element from the req body
+    const {body} = req; */
+
+    /* use matcheddata to take only the validated Data && no need for character restructuring */
+    const body = matchedData(req);
     const newUser = {id: users[users.length-1].id+1, ...body};
     users.push(newUser);
     res.status(201).send(newUser);
