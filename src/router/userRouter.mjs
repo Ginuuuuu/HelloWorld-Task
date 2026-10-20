@@ -12,22 +12,25 @@ route.get('/api/users/:id', (req, res)=>{
 });
 
 route.get("/api/users", (req, res)=>{
-    if (users.length != 0){
+    // converting string to int
+
+    if(req.signedCookies.user && req.signedCookies.user === "admin") {
+        /* //  before cookie-parser
+        console.log(req.headers.cookie); */
+
+        // after cookie-parser
+        console.log(req.signedCookies);
+        // users?filter=susername&values=go
+        const {query:{filter, values}} = req;
+        if(filter && values) {
+            console.log(filter, values);
+            return res.send(users.filter(((user)=>user[filter].toLowerCase().includes(values))));
+        }
         res.status(200).send(users);
         return console.log(users);
     }
-    res.status(400).send({err: "users are empty"});
-});
+    res.status(400).send({err: "To list users you must need admin cookie"});
 
-route.get("/api/users", (req, res)=>{
-    // converting string to int
-
-    // users?filter=susername&values=go
-    const {query:{filter, values}} = req;
-    console.log(filter, values);
-    res.send(users.filter(((user)=>user[filter].toLowerCase().includes(values))));
-
-    console.log(users);
 });
 
 export default route;

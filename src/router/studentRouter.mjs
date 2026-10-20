@@ -17,23 +17,14 @@ route.get("/api/students", (req, res)=>{
     // converting string to int
 
     // users?filter=susername&values=go
-    /* const {query:{filter, values}} = req;
-    console.log(filter, values); */
-    /* res.send(students.filter(((user)=>user[filter].toLowerCase().includes(values)))); */
-    res.status(200).send(students);
-
-    console.log(students);
-});
-
-route.get("/api/students", (req, res)=>{
-    // converting string to int
-
-    // users?filter=susername&values=go
+    res.cookie("BigBuddy", "heyyyy", {maxAge:60000});
     const {query:{filter, values}} = req;
-    console.log(filter, values);
-    res.send(users.filter(((user)=>user[filter].toLowerCase().includes(values))));
-
+    if (filter && values) {
+        console.log(filter, values);
+        return res.send(users.filter(((user)=>user[filter].toLowerCase().includes(values))));
+    }
     console.log(users);
+    res.status(200).send(users);
 });
 
 // GETTING POST REQUEST AND THEN STORING IN IN THE USER ARAY

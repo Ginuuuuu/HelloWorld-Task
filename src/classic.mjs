@@ -1,11 +1,12 @@
 import exp from "express";
-import { createUserCheckScheme } from "./utils/validationSchema.mjs";
+/* import { createUserCheckScheme } from "./utils/validationSchema.mjs";
 import { checkSchema, validationResult, matchedData } from "express-validator";
-import { studfindIndex } from "./utils/helper.mjs";
+import { studfindIndex } from "./utils/helper.mjs"; */
 /* import studentrout from "./router/studentRouter.mjs";
 import userRout from "./router/userRouter.mjs"; */
 import router from "./router/Router.mjs";
 import { users, students } from "./utils/constants.mjs";
+import cookieParser from "cookie-parser";
 
 
 const app = exp();
@@ -13,10 +14,18 @@ const app = exp();
 // GETTING POST REQUEST AS JSON FILE AND PROCESSING IT
 app.use(exp.json());
 
+// get cookies in proper format
+app.use(cookieParser("encrypt"));
+
 app.use(router);
 app.use(router);
 
 const PORT = 4001;
+
+app.get('/', (req, res)=>{
+    res.cookie("user", "admin", {maxAge: 600000 * 60, signed: true});
+    res.send({id: "eee", welcome: "Welcome daaa"});
+});
 
 /* const users = [
     {id: 1, susername: "Reshin"},
@@ -49,10 +58,6 @@ const students = [
     req.studentsIndex = studentsIndex;
     next();
 } */
-
-app.get('/', (req, res)=>{
-    res.send({id: "eee", welcome: "Welcome daaa"});
-});
 
 /* app.get('/api/users/:id', (req, res)=>{
     // converting string to int
