@@ -1,3 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config({path: "./src/confic.env"});
+
+const PORT = process.env.PORT;
+
 import exp from "express";
 /* import { createUserCheckScheme } from "./utils/validationSchema.mjs";
 import { checkSchema, validationResult, matchedData } from "express-validator";
@@ -11,7 +16,7 @@ import session from "express-session";
 import { Strategy as localStrategy } from "passport-local";
 import passport from "passport";
 
-const PORT = 4001;
+
 
 const app = exp();
 
@@ -43,7 +48,7 @@ passport.use( new localStrategy (
     {usernameField: "sname", passwordField: "password"},        /* initialising the field name */
     (sname, password, done) => {
     const student = students.find((student)=> student.sname === sname);
-    if(!sname) {
+    if(!student) {
         return done(null, false, {err: "Invalid User"});
     }
     if(student.password !== password) {
@@ -66,7 +71,7 @@ passport.deserializeUser((id, done) => {
 app.use(router);
 
 app.get('/', (req, res)=>{
-    res.cookie("user", "admin", {maxAge: 600000 * 60, signed: true});
+    res.cookie("user", "admin", {maxAge: 600000 * 60, signed: true});       /* cookies guys cookies */
     console.log(req.session.id);
     req.sessionStore.get(req.session.id, (err, sessionData) => {
         if(err){

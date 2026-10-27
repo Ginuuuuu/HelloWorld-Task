@@ -25,3 +25,10 @@ npm i express-session
 passport for third-party authentifucations && passport-local for username password authentification
 
 npm i passport passport-local
+
+
+
+
+dotenv is used to access the env files
+
+npm i dotenv

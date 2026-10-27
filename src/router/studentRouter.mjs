@@ -89,7 +89,7 @@ route.put("/api/users/:id", (req, res) => {
 });
 
 
-route.delete("/api/students/:id", studfindIndex, (req, res) => {
+route.delete("/api/students/:id", studfindIndex, (req, res) => {   
     // // GETTING THE PARAMETER ID, AND FINDING THE INDEX OF THAT
     // const StudID = parseInt(req.params.id);
     // if (isNaN(StudID)){
