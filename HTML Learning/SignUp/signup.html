@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sign Up Form</title>
+        <link rel="icon", type="image/x-icon" href="assets/S_Favicon.jpg">
+    </head>
+    <body style="background-color:#141414;">
+        <div align="center">
+            <h1 style="color: whitesmoke;">Welcome! Fill the form</h1>
+            <h2 style="color: whitesmoke;">To be our member</h2>
+            <hr style="width: 40%; color: #141414;;">
+        </div>
+        <br><br>
+        <div align="center">
+            <fieldset style="width: 500px; background-color:#222222; border: none; border-radius: 15px">
+                <br><br>
+                <legend align="center" style="color: whitesmoke;">Sign Up</legend>
+                <form action="success.html" style="color: whitesmoke;">
+                    <label>First Name <input type="text", required, placeholder="John" style="border-radius: 5px"></label>
+                    <br><br>
+                    <label>Secon Name <input type="text" placeholder="Paul" style="border-radius: 5px"></label>
+                    <br><br>
+                    <label>UserName <input type="text" name="username" minlength="4" maxlength="10" placeholder="john2r3" style="border-radius: 5px"></label>
+                    <br><br>
+                    <div align="center" style="color: whitesmoke;">
+                        <fieldset style="width: 75%; background-color:#141414; border: none; border-radius: 15px">
+                            <legend>Login Credentials! Remember!!</legend>
+                            <label>Email <input type="email" name="userMail" placeholder="example@gmail.com" required style="border-radius: 5px"></label>
+                            <br><br>
+                            <label>Password <input type="password" placeholder="Secret Please" required style="border-radius: 5px"></label>
+                        </fieldset>
+                    </div>
+                    <br><br>
+                    <div align="center" style="color: whitesmoke;">
+                        <fieldset style="width: 60%; background-color:#141414; border: none; border-radius: 15px;">
+                            <legend>Personal Information</legend>
+                            <br>
+                            <label>Data Of Birth <input type="date" min="16" required style="border-radius: 5px"></label>
+                            <br><br>
+                            <label><input type="radio" name="gender" style="border-radius: 5px"> Male</label>
+                            <label><input type="radio" name="gender" style="border-radius: 5px"> Female</label>
+                            <label><input type="radio" name="gender" style="border-radius: 5px"> Others</label>
+                        </fieldset>
+                    </div>
+                    <br>
+                    <input type="submit">
+                </form>
+            </fieldset>
+        </div>
+    </body>
+</html>
