@@ -1,0 +1,33 @@
+h1{
+    text-align: center;
+    background-color: #080808;
+    color: whitesmoke;
+    font-size: 100px;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+
+}
+
+/* Can write selectors using id, tags */
+
+#head {
+    color: red;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    list-style-type: disc;
+    text-align: center;
+}
+
+
+#head {
+    color: rgba(134, 233, 103, 0.5);
+}

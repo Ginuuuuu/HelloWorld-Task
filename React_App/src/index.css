@@ -1,0 +1,14 @@
+.card {
+  background-color: blueviolet;
+  align-content: center;
+  margin: 5% 20% ;
+  border-radius: 15px;
+}
+
+.field {
+  background-color: rgb(58, 20, 94);
+  border-radius: 20px;
+  align-items: center;
+  margin: 2% 30%;
+  color
+}
