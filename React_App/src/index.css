@@ -1,14 +1,25 @@
 .card {
   background-color: blueviolet;
-  align-content: center;
-  margin: 5% 20% ;
-  border-radius: 15px;
+  max-width: 200px;
+  margin: 10px;
+  border: 1px solid black;
+  padding: 2px;
+  text-align: center;
+  border-radius: 5px;
+  display: inline-block;
+  font-family: sans-serif;
+  
 }
 
-.field {
+.card img {
+  width: 200px;
+  border-radius: 3px;
+}
+
+/* .field {
   background-color: rgb(58, 20, 94);
   border-radius: 20px;
   align-items: center;
   margin: 2% 30%;
   color
-}
+} */

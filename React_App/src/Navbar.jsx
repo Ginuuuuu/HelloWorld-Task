@@ -1,4 +1,7 @@
-function Navbar() {
+
+/* import PropsType from "prop-type" */
+
+/* function Navbar() {
     return(
         <nav>
             <h3>Hello Nav</h3>
@@ -7,12 +10,17 @@ function Navbar() {
     );
 }
 
+const styles = {
+    backgroundColor: "blueviolet",
+    
+}
+
 function Login () {
     return (
         <fieldset className="field">
             <legend>Login</legend>
             <form >
-                <fieldset className="field">
+                <fieldset style={styles}>
                     <legend>Credentials</legend>
                     <br />
                     <label>Unsername <input type="text" required /></label>
@@ -43,6 +51,30 @@ function Course () {
             </form>
         </fieldset>
     );
+} */
+
+function Product (props) {
+
+    return(
+        <div className='card'>
+            <img src={props.pic} alt="image not found" /> 
+            <h3>{props.name}</h3>
+            <p>{props.price}</p>
+        </div>
+    );
+
 }
 
-export { Navbar, Login, Course};
+/* Product.defaultProps = {
+    image: pic,
+    name: "Unavailable",
+    price : "Not Found"
+} */
+
+/* Product.propsType = {
+    name : PropsType.string,
+    price : PropsType.number,
+    
+} */
+
+export default Product;
